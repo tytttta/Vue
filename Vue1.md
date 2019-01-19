@@ -66,6 +66,10 @@
 Vue.js有多种数据绑定的语法，最基础的形式是文本插值，使用一对大括号语法，在运行时 **{{ message }}** 会被数据对象的message属性替换，所以页面上会输出"Hello World!"。
 
 ## 2.3 指令
+
+**Vue.js的指令是以v-开头的，它们作用于HTML元素，指令提供了一些特殊的特性，将指令绑定在元素上时，指令会为绑定的目标元素添加一些特殊的行为，我们可以将指令看作特殊的HTML特性（attribute）。**
+
+
 ### 2.3.1 v-model指令：双向绑定
 
 VM模式本身是实现了双向绑定的，在Vue.js中可以使用v-model指令在表单元素上创建双向数据绑定。
@@ -83,8 +87,112 @@ VM模式本身是实现了双向绑定的，在Vue.js中可以使用v-model指�
 
 > **Vue实例的data属性指向exampleData，它是一个引用类型，改变了exampleData对象的属性，同时也会影响Vue实例的data属性**
 
+### 2.3.2 v-if指令：条件渲染指令，根据表达式的真假来删除和插入元素，它的基本语法如下：
+````
+v-if="expression"
+````
+expression是一个返回bool值的表达式，表达式可以是一个bool属性，也可以是一个返回bool的运算式。
+实例：
+````
+<body>
+		<div id="app">
+			<h1>Hello, Vue.js!</h1>
+			<h1 v-if="yes">Yes!</h1>
+			<h1 v-if="no">No!</h1>
+			<h1 v-if="age >= 25">Age: {{ age }}</h1>
+			<h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				yes: true,
+				no: false,
+				age: 28,
+				name: 'keepfool'
+			}
+		})
+	</script>
+````
+![v-if](https://github.com/tytttta/Vue/blob/master/vue_if.gif)
+
+**注意：v-if指令是根据条件表达式的值来执行元素的插入或者删除行为。**
+
+这一点可以从渲染的HTML源代码看出来，面上只渲染了3个\<h1\>元素, v-if值为false的\<h1\>元素没有渲染到HTML。
 
 
+### 2.3.3 v-show指令
+v-show也是条件渲染指令，和v-if指令不同的是，使用v-show指令的元素始终会被渲染到HTML，它只是简单地为元素设置CSS的style属性。
+
+````
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<h1>Hello, Vue.js!</h1>
+			<h1 v-show="yes">Yes!</h1>
+			<h1 v-show="no">No!</h1>
+			<h1 v-show="age >= 25">Age: {{ age }}</h1>
+			<h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				yes: true,
+				no: false,
+				age: 28,
+				name: 'keepfool'
+			}
+		})
+	</script>
+</html>
+````
+![v-show](https://github.com/tytttta/Vue/blob/master/vue_show.png)
+
+### 2.3.4 v-else指令
+可以用v-else指令为v-if添加一个“else块”。v-else元素必须立即跟在v-if或v-else-if元素的后面——否则它不能被识别.
+**vue2 v-else 不支支持v-show**
+````
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<h1 v-if="age >= 25">Age: {{ age }}</h1>
+			<h1 v-else>Name: {{ name }}</h1>
+			<h1>---------------------分割线---------------------</h1>
+			<h1 v-show="name.indexOf('keep') >= 0">Name: {{ name }}</h1>
+			<h1 v-else>Sex: {{ sex }}</h1>
+		</div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				age: 28,
+				name: 'keepfool',
+				sex: 'Male'
+			}
+		})
+	</script>
+</html>
+````
 
 
 
