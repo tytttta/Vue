@@ -362,5 +362,75 @@ Vue.js为最常用的两个指令v-bind和v-on提供了缩写方式。v-bind指�
 ````
 
 
+## 2.4 案例
+````
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <p>name:<input type="text" v-model="newPeople.name"/></p>
+                <p>Age:<input type="text" v-model="newPeople.age"/></p>
+                <p>Sex:
+                    <select  v-model="newPeople.sex">
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                    </select>
+                </p>
+                <p><input type="button" v-on:click="createPeople" value ="create"/></p>      
 
+                <table border="1">                
+                <tr>
+                    <th>name</th>
+                    <th>age</th>
+                    <th>sex</th>
+                    <th>delete</th>
+                </tr>
+                <tr v-for="(person, index) in people">
+                    <td>{{ person.name }}</td>
+                    <td>{{person.age}}</td>
+                    <td>{{person.sex}}</td>
+                    <td><input type="button" v-on:click="deletePerson(index)" value="delete"/></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script>       
+        var vm=new Vue({
+            el: '#app',
+            data: {
+                newPeople: {
+                    name: '',
+                    age: 0,
+                    sex: 'male'
+                },
+                people: [{
+                    name: 'ty',
+                    age: 1,
+                    sex: 'female'
+                },
+                {
+                    name: 'ty2',
+                    age: 2,
+                    sex: 'male' 
+                }]
+            },
+            methods: {
+                createPeople: function(){
+                    this.people.push(this.newPeople);
+                    this.newPeople = {name: '', age: 0, sex: 'male'}
+
+                },
+                deletePerson: function(index){
+                    this.people.splice(index,1);
+                }
+            }
+            
+        })
+    </script>
+</html>
+````
+![v-bind](https://github.com/tytttta/Vue/blob/master/vue_demo.png)
 
