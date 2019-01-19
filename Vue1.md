@@ -13,7 +13,7 @@
 ## 2.1 MVVM模式
  MVVM模式 即 model-view-viewModel
  
- ![MVVM模型](http://cn.vuejs.org/images/mvvm.png)
+ ![MVVM模型](https://github.com/tytttta/Vue/blob/master/mvvm.png)
  
  viewModel 是Vue的核心，它是一个Vue实例。Vue实例是作用于某一个HTML元素上的，这个元素可以是HTML的body元素，也可以是指定了id的某个元素。
  
@@ -77,6 +77,7 @@ VM模式本身是实现了双向绑定的，在Vue.js中可以使用v-model指�
 </div>
 ````
 将message绑定到文本框，当更改文本框的值时，**\<p\>{{ message }}\</p\>** 中的内容也会被更新。
+![V-Model](https://github.com/tytttta/Vue/blob/master/v-model.gif)
 
 反过来，如果改变message的值，文本框的值也会被更新，我们可以在Chrome控制台进行尝试。
 
